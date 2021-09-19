@@ -69,7 +69,11 @@ namespace Checkers
                     }
                 }
             };
-        }
+            OnFocusEventHandler += (_cell, isSelect) =>
+            {
+                //write to file
+            };
+       }
         public void OnClickMethod(Transform[] _massiveCells)
         {
             OnClickEventHandler += (_cell) =>
