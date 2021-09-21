@@ -16,6 +16,7 @@ namespace Checkers
 
 
         public GameManager manager;
+        public ObserverComponent observer;
         /// <summary>
         /// Возвращает соседа клетки по указанному направлению
         /// </summary>
@@ -27,6 +28,8 @@ namespace Checkers
         {
             manager = gameObject.AddComponent<GameManager>();
             manager.enabled = false;
+            observer = gameObject.AddComponent<ObserverComponent>();
+            observer.enabled = false;
             //Заполнение словаря клеток-соседок.
             EnlistDicNeighbour(_neighbors);
             OnFocusMethod();
@@ -78,6 +81,7 @@ namespace Checkers
         {
             OnClickEventHandler += (_cell) =>
             {
+                //observer.WriteToLog("test message"); //Сигнал в observer о записи действия в лог.
                 Click(_massiveCells);
             };
         }
