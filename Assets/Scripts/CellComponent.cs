@@ -81,7 +81,6 @@ namespace Checkers
         {
             OnClickEventHandler += (_cell) =>
             {
-                //observer.WriteToLog("test message"); //Сигнал в observer о записи действия в лог.
                 Click(_massiveCells);
             };
         }
@@ -166,6 +165,17 @@ namespace Checkers
                 }
                 else
                 {
+                    //Запись в лог о действии: выделение клетки
+                    //Сигнал в observer о записи действия в лог
+                    if (GameObject.Find("Main Camera").GetComponent<GameManager>()._isWhiteMove == true)
+                    {
+                        observer.WriteToLog("Ход белых, выбрана клетка " + gameObject.name); //Ход белых
+                    }
+                    else
+                    {
+                        observer.WriteToLog("Ход чёрных, выбрана клетка " + gameObject.name); //Ход чёрных
+                    }
+
                     //Снять предыдущие выделения клеток
                     //Добавить проверку на цвет выделения. Нельзя выделить фишку не того игрока, чей сейчас ход и клетку вообще без фишки!
                     if (((GameObject.Find("Main Camera").GetComponent<GameManager>()._isWhiteMove == true) && (PairBool(this, GameObject.Find("Main Camera").GetComponent<GameManager>()._whiteChips))) || (((GameObject.Find("Main Camera").GetComponent<GameManager>()._isWhiteMove) == false) && (PairBool(this, GameObject.Find("Main Camera").GetComponent<GameManager>()._blackChips) == true)))
@@ -180,7 +190,7 @@ namespace Checkers
                     }
                     else
                     {
-                        Debug.Log("Ходит другой игрок или выбрана пустая клетка");
+                        Debug.Log("Ходит другой игрок или выбрана пустая клетка"); //Запись в лог о выделении клетки
                     }
                 }
             }

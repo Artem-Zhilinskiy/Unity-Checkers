@@ -31,28 +31,7 @@ namespace Checkers
                 using (StreamWriter sw = File.AppendText(path))
                 {
                     sw.WriteLine(_stringLog);
-                    sw.WriteLine(_stringLog + "2nd");
                 }
-                /*
-                using(var stream = File.OpenWrite(path))
-                {
-                    
-                    using (StreamWriter sw = new StreamWriter(path,true, System.Text.Encoding.Default))
-                    {
-                        sw.WriteLine(_stringLog);
-                    }
-                    
-                    
-                    //using(var writer = new BinaryWriter(stream, Encoding.Default, false))
-                    using (var writer = new StreamWriter(stream))
-                    {
-                        //writer.Write("/n" +_stringLog);
-                        //writer.Seek(0, SeekOrigin.End);
-                        writer.WriteLine(_stringLog);
-                        writer.WriteLine(_stringLog + "2nd");
-                    }
-                }
-                */
             }
         }
 
@@ -62,8 +41,6 @@ namespace Checkers
         {
             //Создание файла в режиме записи партии
             if (isRecorded == true) FileCreation();
-            WriteToLog("test string1"); //тестирование записи в файл
-            WriteToLog("test string2"); //тестирование записи в файл
         }
     }
 }
