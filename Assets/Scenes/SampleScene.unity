@@ -327,6 +327,7 @@ MonoBehaviour:
   isChosen: 0
   isNeighbour: 0
   manager: {fileID: 0}
+  observer: {fileID: 0}
 --- !u!1 &38707665
 GameObject:
   m_ObjectHideFlags: 0
@@ -440,6 +441,7 @@ MonoBehaviour:
   isChosen: 0
   isNeighbour: 0
   manager: {fileID: 0}
+  observer: {fileID: 0}
 --- !u!1 &60116650
 GameObject:
   m_ObjectHideFlags: 0
@@ -868,6 +870,7 @@ MonoBehaviour:
   isChosen: 0
   isNeighbour: 0
   manager: {fileID: 0}
+  observer: {fileID: 0}
 --- !u!1 &84450399
 GameObject:
   m_ObjectHideFlags: 0
@@ -981,6 +984,7 @@ MonoBehaviour:
   isChosen: 0
   isNeighbour: 0
   manager: {fileID: 0}
+  observer: {fileID: 0}
 --- !u!1 &86890429
 GameObject:
   m_ObjectHideFlags: 0
@@ -1280,6 +1284,7 @@ MonoBehaviour:
   isChosen: 0
   isNeighbour: 0
   manager: {fileID: 0}
+  observer: {fileID: 0}
 --- !u!1 &220827888
 GameObject:
   m_ObjectHideFlags: 0
@@ -2860,6 +2865,7 @@ MonoBehaviour:
   isChosen: 0
   isNeighbour: 0
   manager: {fileID: 0}
+  observer: {fileID: 0}
 --- !u!1 &461738816
 GameObject:
   m_ObjectHideFlags: 0
@@ -3177,6 +3183,7 @@ MonoBehaviour:
   isChosen: 0
   isNeighbour: 0
   manager: {fileID: 0}
+  observer: {fileID: 0}
 --- !u!1 &467965061
 GameObject:
   m_ObjectHideFlags: 0
@@ -3995,6 +4002,7 @@ MonoBehaviour:
   isChosen: 0
   isNeighbour: 0
   manager: {fileID: 0}
+  observer: {fileID: 0}
 --- !u!1 &592445604
 GameObject:
   m_ObjectHideFlags: 0
@@ -4312,6 +4320,7 @@ MonoBehaviour:
   isChosen: 0
   isNeighbour: 0
   manager: {fileID: 0}
+  observer: {fileID: 0}
 --- !u!1 &637914685
 GameObject:
   m_ObjectHideFlags: 0
@@ -4814,6 +4823,7 @@ MonoBehaviour:
   isChosen: 0
   isNeighbour: 0
   manager: {fileID: 0}
+  observer: {fileID: 0}
 --- !u!1 &745658320
 GameObject:
   m_ObjectHideFlags: 0
@@ -5224,6 +5234,7 @@ MonoBehaviour:
   isChosen: 0
   isNeighbour: 0
   manager: {fileID: 0}
+  observer: {fileID: 0}
 --- !u!1 &814769048
 GameObject:
   m_ObjectHideFlags: 0
@@ -5587,6 +5598,7 @@ MonoBehaviour:
   isChosen: 0
   isNeighbour: 0
   manager: {fileID: 0}
+  observer: {fileID: 0}
 --- !u!1 &846934075
 GameObject:
   m_ObjectHideFlags: 0
@@ -6471,6 +6483,7 @@ MonoBehaviour:
   - {fileID: 276365911}
   - {fileID: 980527539}
   _trueColor: {fileID: 2100000, guid: 461d3c8ee5b701c4d93859d15eef54da, type: 2}
+  observer: {fileID: 0}
 --- !u!114 &963194231
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6483,7 +6496,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abb12f7d892f7c34aa6018b6ff44e8e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isRecorded: 1
+  isRecorded: 0
   PlayMode: 0
 --- !u!1 &980527538
 GameObject:
@@ -6802,6 +6815,7 @@ MonoBehaviour:
   isChosen: 0
   isNeighbour: 0
   manager: {fileID: 0}
+  observer: {fileID: 0}
 --- !u!1 &1036390174
 GameObject:
   m_ObjectHideFlags: 0
@@ -7305,6 +7319,7 @@ MonoBehaviour:
   isChosen: 0
   isNeighbour: 0
   manager: {fileID: 0}
+  observer: {fileID: 0}
 --- !u!1 &1115558610
 GameObject:
   m_ObjectHideFlags: 0
@@ -7919,6 +7934,7 @@ MonoBehaviour:
   isChosen: 0
   isNeighbour: 0
   manager: {fileID: 0}
+  observer: {fileID: 0}
 --- !u!1 &1307367530
 GameObject:
   m_ObjectHideFlags: 0
@@ -8365,6 +8381,7 @@ MonoBehaviour:
   isChosen: 0
   isNeighbour: 0
   manager: {fileID: 0}
+  observer: {fileID: 0}
 --- !u!1 &1384985009
 GameObject:
   m_ObjectHideFlags: 0
@@ -8478,6 +8495,7 @@ MonoBehaviour:
   isChosen: 0
   isNeighbour: 0
   manager: {fileID: 0}
+  observer: {fileID: 0}
 --- !u!1 &1408444517
 GameObject:
   m_ObjectHideFlags: 0
@@ -8591,6 +8609,7 @@ MonoBehaviour:
   isChosen: 0
   isNeighbour: 0
   manager: {fileID: 0}
+  observer: {fileID: 0}
 --- !u!1 &1418928923
 GameObject:
   m_ObjectHideFlags: 0
@@ -8704,6 +8723,7 @@ MonoBehaviour:
   isChosen: 0
   isNeighbour: 0
   manager: {fileID: 0}
+  observer: {fileID: 0}
 --- !u!1 &1430720605
 GameObject:
   m_ObjectHideFlags: 0
@@ -9003,6 +9023,7 @@ MonoBehaviour:
   isChosen: 0
   isNeighbour: 0
   manager: {fileID: 0}
+  observer: {fileID: 0}
 --- !u!1 &1511618937
 GameObject:
   m_ObjectHideFlags: 0
@@ -9506,6 +9527,7 @@ MonoBehaviour:
   isChosen: 0
   isNeighbour: 0
   manager: {fileID: 0}
+  observer: {fileID: 0}
 --- !u!1 &1556898911
 GameObject:
   m_ObjectHideFlags: 0
@@ -9712,6 +9734,7 @@ MonoBehaviour:
   isChosen: 0
   isNeighbour: 0
   manager: {fileID: 0}
+  observer: {fileID: 0}
 --- !u!1 &1594798132
 GameObject:
   m_ObjectHideFlags: 0
@@ -9918,6 +9941,7 @@ MonoBehaviour:
   isChosen: 0
   isNeighbour: 0
   manager: {fileID: 0}
+  observer: {fileID: 0}
 --- !u!1 &1632844450
 GameObject:
   m_ObjectHideFlags: 0
@@ -10124,6 +10148,7 @@ MonoBehaviour:
   isChosen: 0
   isNeighbour: 0
   manager: {fileID: 0}
+  observer: {fileID: 0}
 --- !u!1 &1680119314
 GameObject:
   m_ObjectHideFlags: 0
@@ -10548,6 +10573,7 @@ MonoBehaviour:
   isChosen: 0
   isNeighbour: 0
   manager: {fileID: 0}
+  observer: {fileID: 0}
 --- !u!1 &1734453890
 GameObject:
   m_ObjectHideFlags: 0
@@ -10865,6 +10891,7 @@ MonoBehaviour:
   isChosen: 0
   isNeighbour: 0
   manager: {fileID: 0}
+  observer: {fileID: 0}
 --- !u!1 &1764362700
 GameObject:
   m_ObjectHideFlags: 0
@@ -11071,6 +11098,7 @@ MonoBehaviour:
   isChosen: 0
   isNeighbour: 0
   manager: {fileID: 0}
+  observer: {fileID: 0}
 --- !u!1 &1789049759
 GameObject:
   m_ObjectHideFlags: 0
@@ -11547,6 +11575,7 @@ MonoBehaviour:
   isChosen: 0
   isNeighbour: 0
   manager: {fileID: 0}
+  observer: {fileID: 0}
 --- !u!1 &1849431735
 GameObject:
   m_ObjectHideFlags: 0
@@ -11753,6 +11782,7 @@ MonoBehaviour:
   isChosen: 0
   isNeighbour: 0
   manager: {fileID: 0}
+  observer: {fileID: 0}
 --- !u!1 &1871998045
 GameObject:
   m_ObjectHideFlags: 0
@@ -11959,6 +11989,7 @@ MonoBehaviour:
   isChosen: 0
   isNeighbour: 0
   manager: {fileID: 0}
+  observer: {fileID: 0}
 --- !u!1 &1908715129
 GameObject:
   m_ObjectHideFlags: 0
@@ -12072,6 +12103,7 @@ MonoBehaviour:
   isChosen: 0
   isNeighbour: 0
   manager: {fileID: 0}
+  observer: {fileID: 0}
 --- !u!1 &1910912104
 GameObject:
   m_ObjectHideFlags: 0
@@ -12371,6 +12403,7 @@ MonoBehaviour:
   isChosen: 0
   isNeighbour: 0
   manager: {fileID: 0}
+  observer: {fileID: 0}
 --- !u!1 &1973726987
 GameObject:
   m_ObjectHideFlags: 0

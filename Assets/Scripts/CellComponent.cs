@@ -90,7 +90,6 @@ namespace Checkers
             if (GameObject.Find("Main Camera").GetComponent<GameManager>()._isInputBlocked == false)
             {
                 //Перемещение фишки
-                //_mesh = GetComponent<MeshRenderer>();
                 //Если произошёл щелчок по подсвеченной клетке
                 //if (_mesh.material == _neighbours)
                 if (isNeighbour == true)
@@ -98,6 +97,8 @@ namespace Checkers
                     //Запомнить её координаты
                     float x = this.gameObject.transform.position.x;
                     float z = this.gameObject.transform.position.z;
+                    //Запоминаем её имя для observer
+                    string _targetCell= this.gameObject.name;
                     foreach (var _cellChosen in _massiveCells)
                     {
                         //Найти выделенную клетку с материалом _chosenOne
@@ -114,8 +115,13 @@ namespace Checkers
                             //Записать координаты фишки, которая сейчас ходит. (Стоит на выделенной клетке)
                             float x0 = _chipChosen.position.x;
                             float z0 = _chipChosen.position.z;
-                            //Повернуть фишку в сторону подсвеченной клетки
-                            //_chipChosen.LookAt(this.gameObject.transform);
+                            //Записать имя этой клетки для observer
+                            string _exodusCell = _cellChosen.gameObject.name;
+                            //Вывести запись о передвижении фишки в лог observer
+                            if (GameObject.Find("Main Camera").GetComponent<ObserverComponent>().isRecorded == true)
+                            {
+                                observer.WriteToLog("Передвижение фишки с клетки " + _exodusCell + " на клетку " + _targetCell); //Запись вида: передвижение фишки с клетки A3 на клетку B4
+                            }
                             //Определить, съедают ли какую-то фишку
                             Transform _chipToDestroy = null;
                             if (Math.Abs(x - x0) == 2)
@@ -148,16 +154,40 @@ namespace Checkers
                             //Подвинуть фишку на подсвеченную клетку
                             //manager.MoveChip(_chipChosen,_chipToDestroy, this.gameObject.transform);
                             manager.MoveChip(_chipChosen, _chipToDestroy, x, z);
+
+                            //Запись в лог о съедении фишки
+                            if (GameObject.Find("Main Camera").GetComponent<ObserverComponent>().isRecorded == true && _chipToDestroy != null)
+                            {
+                                //Найти имя клетки, на которой стоит съедаемая фишка
+                                foreach (var _cell in GameObject.Find("Main Camera").GetComponent<GameManager>()._blackCells)
+                                {
+                                    if ((_cell.position.x == _chipToDestroy.position.x) && (_cell.position.z == _chipToDestroy.position.z))
+                                    {
+                                        observer.WriteToLog("Съедена фишка на клетке " + _cell.gameObject.name);
+                                    }
+                                }
+                            }
+
                             //Снять выделения клеток
                             UnCheck(_massiveCells);
                             //Смена хода
                             if (GameObject.Find("Main Camera").GetComponent<GameManager>()._isWhiteMove == true)
                             {
                                 GameObject.Find("Main Camera").GetComponent<GameManager>()._isWhiteMove = false;
+                                //Запись в observer о смене хода
+                                if (GameObject.Find("Main Camera").GetComponent<ObserverComponent>().isRecorded == true)
+                                {
+                                    observer.WriteToLog("Ход чёрных");
+                                }
                             }
                             else
                             {
                                 GameObject.Find("Main Camera").GetComponent<GameManager>()._isWhiteMove = true;
+                                //Запись в observer о смене хода
+                                if (GameObject.Find("Main Camera").GetComponent<ObserverComponent>().isRecorded == true)
+                                {
+                                    observer.WriteToLog("Ход белых");
+                                }
                             }
                             return;
                         }
@@ -165,17 +195,11 @@ namespace Checkers
                 }
                 else
                 {
-                    //Запись в лог о действии: выделение клетки
                     //Сигнал в observer о записи действия в лог
-                    if (GameObject.Find("Main Camera").GetComponent<GameManager>()._isWhiteMove == true)
+                    if (GameObject.Find("Main Camera").GetComponent<ObserverComponent>().isRecorded == true)
                     {
-                        observer.WriteToLog("Ход белых, выбрана клетка " + gameObject.name); //Ход белых
+                        observer.WriteToLog("Выбрана клетка " + gameObject.name);
                     }
-                    else
-                    {
-                        observer.WriteToLog("Ход чёрных, выбрана клетка " + gameObject.name); //Ход чёрных
-                    }
-
                     //Снять предыдущие выделения клеток
                     //Добавить проверку на цвет выделения. Нельзя выделить фишку не того игрока, чей сейчас ход и клетку вообще без фишки!
                     if (((GameObject.Find("Main Camera").GetComponent<GameManager>()._isWhiteMove == true) && (PairBool(this, GameObject.Find("Main Camera").GetComponent<GameManager>()._whiteChips))) || (((GameObject.Find("Main Camera").GetComponent<GameManager>()._isWhiteMove) == false) && (PairBool(this, GameObject.Find("Main Camera").GetComponent<GameManager>()._blackChips) == true)))

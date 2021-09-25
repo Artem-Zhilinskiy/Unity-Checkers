@@ -33,7 +33,7 @@ namespace Checkers
         [Tooltip("Изначальный цвет клетки"), SerializeField]
         public Material _trueColor;
 
-
+        public ObserverComponent observer;
 
         Coroutine MoveAndDestroy;
         Coroutine MoveCamera;
@@ -119,6 +119,10 @@ namespace Checkers
                 if ((_chip.position.z == 7) || (GameObject.Find("Main Camera").GetComponent<GameManager>()._blackChips == null))
                 {
                     Debug.Log("Белые победили");
+                    if (GameObject.Find("Main Camera").GetComponent<ObserverComponent>().isRecorded == true)
+                    {
+                        GameObject.Find("Main Camera").GetComponent<ObserverComponent>().WriteToLog("Белые победили. \n Конец записи");
+                    }
                     UnityEditor.EditorApplication.isPaused = true;
                 }
             }
@@ -127,6 +131,10 @@ namespace Checkers
                 if ((_chip.position.z == 0) || (GameObject.Find("Main Camera").GetComponent<GameManager>()._whiteChips == null))
                 {
                     Debug.Log("Чёрные победили");
+                    if (GameObject.Find("Main Camera").GetComponent<ObserverComponent>().isRecorded == true)
+                    {
+                        GameObject.Find("Main Camera").GetComponent<ObserverComponent>().WriteToLog("Чёрные победили.\nКонец записи");
+                    }
                     UnityEditor.EditorApplication.isPaused = true;
                 }
             }
