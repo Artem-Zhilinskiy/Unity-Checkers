@@ -65,7 +65,16 @@ namespace Checkers
                 while ((_line = sr.ReadLine())!= null)
                 {
                     //Debug.Log(_line);
-                    //Распознавание строк
+                    //Распознавание строк:
+                    /*
+                    1. Выбор клетки
+                    2. Передвижение фишки
+                    3. Уничтожение фишки
+                    4. Передача хода
+                    5. Победа
+                    Исходные данные - поиск подстроки, выполнение метода
+                    */
+                    //1. Выбор клетки
                     if (_line.Contains("Выбрана клетка"))
                     {
                         //Распознание, какая клетка всё-таки выбрана
@@ -75,9 +84,45 @@ namespace Checkers
                         {
                             if (_cell.gameObject.name == _cellName)
                             {
-
+                                //Метод выделения клетки материалом _ChosenOne 
+                                //Debug.Log(_line);
                             }
                         }
+                    }
+
+                    //2.Передвижение фишки
+                    if (_line.Contains("Передвижение фишки"))
+                    {
+                        string _exodusCell = _line.Substring(28, 2);
+                        string _targetCell = _line.Substring(41, 2);
+                        //Debug.Log("\nexodus cell " + _exodusCell + "\ntarget cell " + _targetCell);
+                        //Метод передвижения фишки с входными строковыми данными _exodusCell и _targetCell
+                        //корутина задержки
+                    }
+
+                    //3. Уничтожение фишки
+                    if (_line.Contains("Съедена фишка"))
+                    {
+                        string _cellEaten = _line.Substring(24);
+                        //Debug.Log("Съедена фишка на " + _cellEaten);
+                        //метод унитожения фишки и очистки массива
+                        //корутина задержки
+                    }
+
+                    //4. Передача хода => вращение камеры
+                    if (_line.Contains("Ход"))
+                    {
+                        //Метод вращения камеры
+                        //корутина задержки
+                        //Debug.Log(_line + ": вращение камеры");
+                    }
+
+                    //5. Победа
+                    if (_line.Contains("победили"))
+                    {
+                        Debug.Log(_line);
+                        //корутина задержки
+                        //UnityEditor.EditorApplication.isPaused = true; //Конец режима
                     }
                 }
             }

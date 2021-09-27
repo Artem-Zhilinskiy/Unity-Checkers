@@ -6496,8 +6496,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abb12f7d892f7c34aa6018b6ff44e8e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isRecorded: 0
-  PlayMode: 0
+  isRecorded: 1
+  PlayMode: 1
 --- !u!1 &980527538
 GameObject:
   m_ObjectHideFlags: 0
