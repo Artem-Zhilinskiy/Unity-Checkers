@@ -84,8 +84,10 @@ namespace Checkers
                         {
                             if (_cell.gameObject.name == _cellName)
                             {
+                                var _cellScript = _cell.GetComponent<CellComponent>();
                                 //Метод выделения клетки материалом _ChosenOne 
-                                //Debug.Log(_line);
+                                _cellScript.ChangeMaterial(GameObject.Find("Main Camera").GetComponent<GameManager>()._chosenOne);
+                                Debug.Log(_line);
                             }
                         }
                     }
