@@ -15,10 +15,8 @@ namespace Checkers
 
         private string path = Environment.CurrentDirectory + "//CheckersLog.txt"; //Задание пути файла
 
-        bool _stopFactor = false;
-
         //Корутина задержки
-        Coroutine ReplayCoroutine;
+        //Coroutine ReplayCoroutine;
 
         //Создание файла
         private void FileCreation()
@@ -50,14 +48,15 @@ namespace Checkers
             {
                 isRecorded = false;
                 Debug.Log("Включён режим воспроизведения");
+
                 //Блокировка ввода
                 GameObject.Find("Main Camera").GetComponent<GameManager>()._isInputBlocked = true;
-                using (StreamReader sr = new StreamReader(path))
-                {
-                    string _line = sr.ReadLine(); //Пропуск первой строки
-                    Debug.Log(_line);
-                    ReplayCoroutine = StartCoroutine(Replay(sr));
-                }
+
+                //Считывание файла в список строк
+                List<string> _file =  ReadLog();
+                //Проверка работы метода ReadLog
+                CheckReadLog(_file);
+
             }
             //Создание файла в режиме записи партии
             if (isRecorded == true) FileCreation();
@@ -152,23 +151,21 @@ namespace Checkers
             }
         }
 */
-
+        /*
         private IEnumerator Replay(StreamReader sr)
         {
-            while (true)
+            yield return new WaitForSecondsRealtime(2f);
+            Debug.Log("Тест");
+            string _line = sr.ReadLine();
+            Debug.Log(_line);
+            //1. Выбор клетки
+            if (_line.Contains("Выбрана клетка"))
             {
-                yield return new WaitForSecondsRealtime(2f);
-                Debug.Log("Тест");
-                string _line = sr.ReadLine();
-                Debug.Log(_line);
-                //1. Выбор клетки
-                if (_line.Contains("Выбрана клетка"))
-                {
-                    ChooseCell(_line);
-                }
+                ChooseCell(_line);
             }
             yield return null;
         }
+        */
         private void ChooseCell(string _line)
         {
             string _cellName = _line.Substring(15);
@@ -181,6 +178,34 @@ namespace Checkers
                     //Метод выделения клетки материалом _ChosenOne 
                     _cellScript.ChangeMaterial(GameObject.Find("Main Camera").GetComponent<GameManager>()._chosenOne);
                 }
+            }
+        }
+
+        //Считывание файла в список строк
+        private List<string> ReadLog()
+        {
+            using (StreamReader sr = new StreamReader(path))
+            {
+                List<string> _file = new List<string>();
+                string _line = sr.ReadLine();
+                do
+                { 
+                    //Debug.Log(_line);
+                    _file.Add(_line);
+                    _line = sr.ReadLine();
+                } while (_line != null);
+                return _file;
+            }
+        }
+
+        //Проверка метода ReadLog()
+        private void CheckReadLog(List<string> _file)
+        {
+            int i = 0;
+            while (i <_file.Count)
+            {
+                Debug.Log(_file[i]);
+                i++;
             }
         }
     }

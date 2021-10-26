@@ -60,7 +60,7 @@ namespace Checkers
             {
                 if ((isChosen == false) && (isNeighbour == false))
                 {
-                    if (isSelect == true) 
+                    if (isSelect == true)
                     {
                         ChangeMaterial(_chosenOne);
                         //Debug.Log("onFocusMethod Enter");
@@ -71,10 +71,6 @@ namespace Checkers
                         //Debug.Log("onFocusMethod Exit");
                     }
                 }
-            };
-            OnFocusEventHandler += (_cell, isSelect) =>
-            {
-                //write to file
             };
        }
         public void OnClickMethod(Transform[] _massiveCells)
