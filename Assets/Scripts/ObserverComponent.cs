@@ -75,11 +75,14 @@ namespace Checkers
                 _line = _file[i];
                 if (_line.Contains("Выбрана клетка"))
                 {
-                    Debug.Log("Метод по выбору клетки");
+                    //Debug.Log("Метод по выбору клетки");
+                    DeChooseCell();
+                    ChooseCell(_line);
                 }
                 else if (_line.Contains("Передвижение фишки"))
                 {
                     Debug.Log("Метод по передвижению фишки");
+                    MoveChip(_line);
                 }
                 else if (_line.Contains("Съедена фишка"))
                 {
@@ -94,8 +97,40 @@ namespace Checkers
                     Debug.Log("Метод по определению победителя и окончанию режима воспроизведения");
                 }
             }
+        }
 
+        private void ChooseCell(string _line)
+        {
+            //Распознание, какая клетка всё-таки выбрана
+            string _cellName = _line.Substring(15);
+            //Debug.Log(_cellName);
+            foreach (var _cell in GameObject.Find("Main Camera").GetComponent<GameManager>()._blackCells)
+            {
+                if (_cell.gameObject.name == _cellName)
+                {
+                    var _cellScript = _cell.GetComponent<CellComponent>();
+                    //Метод выделения клетки материалом _ChosenOne 
+                    _cellScript.ChangeMaterial(GameObject.Find("Main Camera").GetComponent<GameManager>()._chosenOne);
+                    //Debug.Log(_line);
+                    return;
+                }
+            }
+        }
 
+        private void DeChooseCell()
+        {
+            foreach (var _cell in GameObject.Find("Main Camera").GetComponent<GameManager>()._blackCells)
+            {
+                var _cellScript = _cell.GetComponent<CellComponent>();
+                _cellScript.ChangeMaterial(GameObject.Find("Main Camera").GetComponent<GameManager>()._trueColor);
+            }
+        }
+
+        private void MoveChip(string _line)
+        {
+            string _exodusCell = _line.Substring(28, 2);
+            string _targetCell = _line.Substring(41, 2);
+            Debug.Log("exodus cell " + _exodusCell + " target cell " + _targetCell);
         }
 
             //Модуль воспроизведения.
@@ -202,20 +237,6 @@ namespace Checkers
                 yield return null;
             }
             */
-            private void ChooseCell(string _line)
-        {
-            string _cellName = _line.Substring(15);
-            //Debug.Log(_cellName);
-            foreach (var _cell in GameObject.Find("Main Camera").GetComponent<GameManager>()._blackCells)
-            {
-                if (_cell.gameObject.name == _cellName)
-                {
-                    var _cellScript = _cell.GetComponent<CellComponent>();
-                    //Метод выделения клетки материалом _ChosenOne 
-                    _cellScript.ChangeMaterial(GameObject.Find("Main Camera").GetComponent<GameManager>()._chosenOne);
-                }
-            }
-        }
 
         //Считывание файла в список строк
         private List<string> ReadLog()
