@@ -49,7 +49,7 @@ namespace Checkers
             }
             return false;
         }
-        public Transform Pair2(Transform[] _massiveCells, Transform Chip)
+        public static Transform Pair2(Transform[] _massiveCells, Transform Chip)
         {
             float x = Chip.position.x;
             float z = Chip.position.z;

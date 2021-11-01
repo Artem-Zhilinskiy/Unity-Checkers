@@ -18,6 +18,9 @@ namespace Checkers
         //Корутина задержки
         Coroutine MainReplayCoroutine;
 
+        //Корутина движения фишки
+        Coroutine MoveChipCoroutine;
+
         //Создание файла
         private void FileCreation()
         {
@@ -59,7 +62,6 @@ namespace Checkers
 
                 //Корутина обработки списка строк с задержками.
                 MainReplayCoroutine = StartCoroutine(MainReplay(_file));
-
             }
             //Создание файла в режиме записи партии
             if (isRecorded == true) FileCreation();
@@ -70,7 +72,7 @@ namespace Checkers
             string _line;
             for (int i = 0; i<_file.Count; i++)
             {
-                yield return new WaitForSecondsRealtime(1f);
+                yield return new WaitForSecondsRealtime(2f);
                 Debug.Log(_file[i]);
                 _line = _file[i];
                 if (_line.Contains("Выбрана клетка"))
@@ -81,7 +83,7 @@ namespace Checkers
                 }
                 else if (_line.Contains("Передвижение фишки"))
                 {
-                    Debug.Log("Метод по передвижению фишки");
+                    //Debug.Log("Метод по передвижению фишки");
                     MoveChip(_line);
                 }
                 else if (_line.Contains("Съедена фишка"))
@@ -131,6 +133,40 @@ namespace Checkers
             string _exodusCell = _line.Substring(28, 2);
             string _targetCell = _line.Substring(41, 2);
             Debug.Log("exodus cell " + _exodusCell + " target cell " + _targetCell);
+            //Определение двигаемой фишки
+            Transform _chip = ChipDetect(_exodusCell);
+            //Получение координат целевой клетки
+            float _targetX = GameObject.Find(_targetCell).GetComponent<Transform>().position.x;
+            float _targetZ = GameObject.Find(_targetCell).GetComponent<Transform>().position.z;
+            //Запуск корутины движения фишки
+            MoveChipCoroutine = StartCoroutine(ChipMove(_chip, _targetX, _targetZ));
+        }
+
+        //Получение Transform фишки, которая стоит на этой клетке
+        private Transform ChipDetect(string _cellString)
+        {
+            Transform _cell = GameObject.Find(_cellString).GetComponent<Transform>();
+            Transform _detectedChip = BaseClickComponent.Pair2(GameObject.Find("Main Camera").GetComponent<GameManager>()._blackChips, _cell);
+            if (_detectedChip == null)
+            {
+                _detectedChip = BaseClickComponent.Pair2(GameObject.Find("Main Camera").GetComponent<GameManager>()._whiteChips, _cell);
+            }
+            return _detectedChip;
+        }
+
+        private IEnumerator ChipMove(Transform _chip, float x, float z)
+        {
+            while (true)
+            {
+                yield return new WaitForSecondsRealtime(Time.deltaTime);
+                Vector3 target = new Vector3(x, 0.1f, z); //Почему 0,1 Если мне надо, чтобы он пришёл в 1??? А если 1, то приходит в 10? Почему Y умножается на 10?
+                _chip.position = Vector3.MoveTowards(_chip.position, target, Time.deltaTime * 5);
+
+                if ((_chip.position.x == x) && (_chip.position.z == z))
+                {
+                    yield break;
+                }
+            }
         }
 
             //Модуль воспроизведения.
