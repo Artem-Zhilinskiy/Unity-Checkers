@@ -56,7 +56,7 @@ namespace Checkers
             //Debug.Log("x = " + x + " z = " + z);
             foreach (var cell in _massiveCells)
             {
-                if ((cell.transform.position.x == x) && (cell.transform.position.z == z))
+                if ((cell.gameObject.activeSelf == true) && (cell.transform.position.x == x) && (cell.transform.position.z == z))
                 {
                     return cell;
                 }

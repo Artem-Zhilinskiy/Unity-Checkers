@@ -72,7 +72,7 @@ namespace Checkers
             string _line;
             for (int i = 0; i<_file.Count; i++)
             {
-                yield return new WaitForSecondsRealtime(2f);
+                yield return new WaitForSecondsRealtime(0.5f);
                 Debug.Log(_file[i]);
                 _line = _file[i];
                 if (_line.Contains("Выбрана клетка"))
@@ -88,15 +88,20 @@ namespace Checkers
                 }
                 else if (_line.Contains("Съедена фишка"))
                 {
-                    Debug.Log("Метод по уничтожению фишки");
+                    //Debug.Log(_line);
+                    DestroyChip(_line);
                 }
+                /*
                 else if (_line.Contains("Ход"))
                 {
                     Debug.Log("Метод по передаче хода");
                 }
+                */
                 else if (_line.Contains("победили"))
                 {
-                    Debug.Log("Метод по определению победителя и окончанию режима воспроизведения");
+                    //Debug.Log("Метод по определению победителя и окончанию режима воспроизведения");
+                    //Debug.Log(_line);
+                    UnityEditor.EditorApplication.isPaused = true;
                 }
             }
         }
@@ -132,7 +137,7 @@ namespace Checkers
         {
             string _exodusCell = _line.Substring(28, 2);
             string _targetCell = _line.Substring(41, 2);
-            Debug.Log("exodus cell " + _exodusCell + " target cell " + _targetCell);
+            //Debug.Log("exodus cell " + _exodusCell + " target cell " + _targetCell);
             //Определение двигаемой фишки
             Transform _chip = ChipDetect(_exodusCell);
             //Получение координат целевой клетки
@@ -167,6 +172,15 @@ namespace Checkers
                     yield break;
                 }
             }
+        }
+
+        private void DestroyChip(string _line)
+        {
+            string _cellEaten = _line.Substring(24);
+            //Определение уничтожаемой фишки
+            Transform _chip = ChipDetect(_cellEaten);
+            //Деактивация фишки
+            _chip.gameObject.SetActive(false);
         }
 
             //Модуль воспроизведения.
