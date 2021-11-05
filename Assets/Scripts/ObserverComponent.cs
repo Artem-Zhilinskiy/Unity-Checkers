@@ -62,6 +62,8 @@ namespace Checkers
 
                 //Корутина обработки списка строк с задержками.
                 MainReplayCoroutine = StartCoroutine(MainReplay(_file));
+
+                
             }
             //Создание файла в режиме записи партии
             if (isRecorded == true) FileCreation();
@@ -72,7 +74,7 @@ namespace Checkers
             string _line;
             for (int i = 0; i<_file.Count; i++)
             {
-                yield return new WaitForSecondsRealtime(0.5f);
+                yield return new WaitForSecondsRealtime(0.1f);
                 Debug.Log(_file[i]);
                 _line = _file[i];
                 if (_line.Contains("Выбрана клетка"))
@@ -84,7 +86,17 @@ namespace Checkers
                 else if (_line.Contains("Передвижение фишки"))
                 {
                     //Debug.Log("Метод по передвижению фишки");
-                    MoveChip(_line);
+                    //MoveChip(_line);
+                    string _exodusCell = _line.Substring(28, 2);
+                    string _targetCell = _line.Substring(41, 2);
+                    //Debug.Log("exodus cell " + _exodusCell + " target cell " + _targetCell);
+                    //Определение двигаемой фишки
+                    Transform _chip = ChipDetect(_exodusCell);
+                    //Получение координат целевой клетки
+                    float _targetX = GameObject.Find(_targetCell).GetComponent<Transform>().position.x;
+                    float _targetZ = GameObject.Find(_targetCell).GetComponent<Transform>().position.z;
+                    //Запуск корутины движения фишки
+                    yield return StartCoroutine(ChipMove(_chip, _targetX, _targetZ));
                 }
                 else if (_line.Contains("Съедена фишка"))
                 {
@@ -132,7 +144,7 @@ namespace Checkers
                 _cellScript.ChangeMaterial(GameObject.Find("Main Camera").GetComponent<GameManager>()._trueColor);
             }
         }
-
+        /*
         private void MoveChip(string _line)
         {
             string _exodusCell = _line.Substring(28, 2);
@@ -146,6 +158,7 @@ namespace Checkers
             //Запуск корутины движения фишки
             MoveChipCoroutine = StartCoroutine(ChipMove(_chip, _targetX, _targetZ));
         }
+        */
 
         //Получение Transform фишки, которая стоит на этой клетке
         private Transform ChipDetect(string _cellString)
